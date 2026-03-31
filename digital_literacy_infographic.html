@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Literacy for Students</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg1: #0b1020;
+      --bg2: #111827;
+      --panel: rgba(255,255,255,0.08);
+      --panel-2: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent1: #60a5fa;
+      --accent2: #22d3ee;
+      --accent3: #a78bfa;
+      --accent4: #34d399;
+      --accent5: #f472b6;
+      --shadow: 0 24px 80px rgba(0,0,0,0.35);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(34,211,238,0.15), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(167,139,250,0.14), transparent 22%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .poster {
+      width: 1200px;
+      min-height: 1800px;
+      border-radius: 34px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .poster::before,
+    .poster::after {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 999px;
+      filter: blur(60px);
+      z-index: -1;
+      opacity: 0.55;
+    }
+
+    .poster::before {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      top: -120px;
+      right: -90px;
+    }
+
+    .poster::after {
+      background: linear-gradient(135deg, var(--accent3), var(--accent5));
+      bottom: -120px;
+      left: -90px;
+    }
+
+    .hero {
+      padding: 72px 68px 40px;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e2e8f0;
+      font-size: 18px;
+      letter-spacing: 0.3px;
+      margin-bottom: 22px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 72px;
+      line-height: 0.96;
+      letter-spacing: -2px;
+      max-width: 820px;
+      text-wrap: balance;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff, #bfdbfe, #a5f3fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      margin: 24px 0 0;
+      max-width: 840px;
+      font-size: 26px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding: 0 68px 12px;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 22px 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .content {
+      padding: 28px 40px 58px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    .card {
+      border-radius: 28px;
+      padding: 28px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%);
+      pointer-events: none;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 32px;
+      letter-spacing: -0.6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card p, .card li {
+      font-size: 22px;
+      line-height: 1.65;
+      color: #e2e8f0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 26px;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(34,211,238,0.10));
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .tool {
+      border-radius: 20px;
+      padding: 18px 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    .tool strong { display: block; font-size: 21px; margin-bottom: 4px; }
+
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 19px;
+      color: #f8fafc;
+    }
+
+    .footer {
+      padding: 0 40px 44px;
+    }
+
+    .tagline {
+      border-radius: 28px;
+      padding: 28px 34px;
+      font-size: 28px;
+      line-height: 1.55;
+      text-align: center;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(167,139,250,0.16), rgba(34,211,238,0.16));
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body>
+  <div class="poster">
+    <section class="hero">
+      <div class="eyebrow">✨ Student Digital Awareness Poster</div>
+      <h1><span class="gradient-text">Digital Literacy</span><br>for Students</h1>
+      <p>Learn how to use technology confidently, communicate professionally, and stay safe in a fast-moving digital world.</p>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <strong>Learn Smart</strong>
+        <span>Use the right digital tools for assignments, teamwork, and self-growth.</span>
+      </div>
+      <div class="stat">
+        <strong>Stay Safe</strong>
+        <span>Protect your accounts, privacy, and money from common online threats.</span>
+      </div>
+      <div class="stat">
+        <strong>Look Professional</strong>
+        <span>Build a strong online presence for internships, projects, and future jobs.</span>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="stack">
+        <div class="card highlight">
+          <h2>💡 What is Digital Literacy?</h2>
+          <p>Digital literacy is the ability to use devices, apps, websites, and online platforms effectively, responsibly, and safely for communication, learning, and problem-solving.</p>
+        </div>
+
+        <div class="card">
+          <h2>🛠 Useful Digital Tools</h2>
+          <div class="tools">
+            <div class="tool"><strong>Google Docs</strong>Assignments, notes, teamwork</div>
+            <div class="tool"><strong>GitHub</strong>Projects, coding, portfolio</div>
+            <div class="tool"><strong>Canva</strong>Posters, slides, visual design</div>
+            <div class="tool"><strong>LinkedIn</strong>Networking and career growth</div>
+            <div class="tool"><strong>Google Forms</strong>Quizzes, surveys, feedback</div>
+            <div class="tool"><strong>Drive</strong>Cloud storage and sharing</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>🔐 Safe Internet Practices</h2>
+          <div class="pill-grid">
+            <div class="pill">Use strong passwords</div>
+            <div class="pill">Enable 2-factor authentication</div>
+            <div class="pill">Never share OTP or PIN</div>
+            <div class="pill">Avoid suspicious links</div>
+            <div class="pill">Verify before sharing</div>
+            <div class="pill">Download only from trusted sources</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h2>💼 Professional Online Presence</h2>
+          <ul>
+            <li>Keep your profiles updated</li>
+            <li>Use clear and formal language</li>
+            <li>Show your skills and projects</li>
+            <li>Share useful and positive content</li>
+            <li>Build a trustworthy online image</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>📧 Email Etiquette</h2>
+          <ul>
+            <li>Write a clear subject line</li>
+            <li>Use a respectful greeting</li>
+            <li>Keep your message short and structured</li>
+            <li>Check grammar and spelling</li>
+            <li>End with a proper sign-off</li>
+          </ul>
+        </div>
+
+        <div class="card highlight">
+          <h2>🚀 Why It Matters</h2>
+          <p>Digital literacy helps students study better, communicate clearly, avoid online scams, and prepare for future internships, careers, and responsible digital citizenship.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="tagline">Think Before You Click • Learn Before You Share • Build Before You Apply • Stay Safe Online</div>
+    </div>
+  </div>
+</body>
+</html>
